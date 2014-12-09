@@ -26,15 +26,16 @@ I will initialize the subsystem as follows:
 
 ```
   ADC10CTL0 = ADC10SHT_3 + ADC10ON + ADC10IE; // ADC10ON, interrupt enabled
-  ADC10CTL1 = INCH_2|INCH_3|INCH_4|INCH_5;    // input A4
-  ADC10AE0 |= BIT4;                           // PA.1 ADC option select
+  ADC10CTL1 = INCH_3			      // input A3
+  ADC10AE0 |= BIT3;                           // PA.1 ADC option select
   ADC10CTL1 |= ADC10SSEL1|ADC10SSEL0;         // Select SMCLK
-  P1DIR |= BIT2|BIT3|BIT4|BIT5;               // Set P1.0 to output direction
+  P1DIR |= BIT3|BIT4|BIT;       	      // Set P1.0 to output direction
 ```
+I will repeat this process for `A4` and `A5`.
 
 **Consider the hardware interface. Which ADC10 channels will you use? Which pins correspond to those channels?**
 
-I will use `A2`, `A3`, `A4`, and `A5` which correspond to `P1.2`, `P1.3`, `P1.4`, and `P1.5`, respectively.
+I will use `A3`, `A4`, and `A5` which correspond to `P1.2`, `P1.3`, and `P1.4`, respectively.
 
 **Consider the interface you'll create to your sensors. Will you block or use interrupts? Will you convert one sensor at a time or multiple?**
 
