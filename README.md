@@ -1,9 +1,16 @@
-Lab 7/8
-=====
+Lab 7
+====
+#### Clayton Jaksha | ECE 382 | Dr. York | M2A
+## Objective and Purpose
+### Objective
 
-ECE 382 Lab7/8: Robot Maze
+The objective of this lab is to interpret the analog readings from our infrared sensors by making lights turn on and off when in varying proximity to the robot.
 
-## Prelab
+### Purpose
+
+To practice analog-to-digital implementation in a real-world application.
+
+## Preliminary Design
 
 **Include whatever information from this lab you think will be useful in creating your program.**
 
