@@ -14,7 +14,7 @@ To practice analog-to-digital implementation in a real-world application.
 
 **Include whatever information from this lab you think will be useful in creating your program.**
 
-We must read the IR sensors through `P1.2`, `P1.3`, `P1.4`, and `P1.5`. The basic structure of the code will be polling each of the three sensors and then acting off of the values received by the sensors.
+We must read the IR sensors through `P1.2`, `P1.3`, and `P1.4`. The basic structure of the code will be polling each of the three sensors and then acting off of the values received by the sensors.
 
 **Test your sensors with a DMM. Ensure they are functional. What would good reference values be?**
 
@@ -72,47 +72,7 @@ Please check repository for `sensors.h`, `sensors.c`, and `readme_sensors.md`. T
 
 #### Hardware Schematic
 ![alt text](https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10836211_1001492989864963_1971890665_n.jpg?oh=77c8c6f40db9cd797dcc3c54f3648a04&oe=547E3D40&__gda__=1417478673_3e5f336960c24b2c4275500b1e7637e1 "dat hardware")
-#### Pseudocode
-##### `moveRobotForward()`
-```
-void moveRobotForward(void);
-  _disable_interrupts();
-  P1SEL |= BIT2|BIT4;
-  P1OUT &=~(BIT3|BIT5);
-  _enable_interrupts();
-```
-##### `moveRobotLeft()`
-```
-void moveRobotForward(void);
-  _disable_interrupts();
-  P1SEL |= BIT3|BIT4;
-  P1OUT &=~(BIT2|BIT5);
-  _enable_interrupts();
-```
-##### `moveRobotRight()`
-```
-void moveRobotForward(void);
-  _disable_interrupts();
-  P1SEL |= BIT2|BIT5;
-  P1OUT &=~(BIT3|BIT4);
-  _enable_interrupts();
-```
-##### `moveRobotBackwards()`
-```
-void moveRobotForward(void);
-  _disable_interrupts();
-  P1SEL |= BIT3|BIT5;
-  P1OUT &=~(BIT2|BIT4);
-  _enable_interrupts();
-```
 
-#### Basic Functionality
-
-Once I program basic functions that will make the wheels spin in the desired direction and speed, I will program them in to a script. I will call those functions followed by some amount of delay in the form of `__delay_cycles(###)`.
-
-#### Remote-Control Robert
-
-For this part, I will affix my IR sensor (seen in hardware schematic) and then reuse my code from Lab 5. Instead of using script to control the robot for this portion, I will use `if` statements that change Robert's movement based on the signal it takes in from the remote control.
 
 ## Code Walkthrough
 ### Basic Functionality
