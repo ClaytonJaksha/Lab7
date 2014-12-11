@@ -71,7 +71,8 @@ Please check repository for `sensors.h`, `sensors.c`, and `readme_sensors.md`. T
 |         0         |                3FF               |               1023               |         0         |                38F               |                911               |            0           |                397               |                919               |
 
 #### Hardware Schematic
-![alt text](https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10836211_1001492989864963_1971890665_n.jpg?oh=77c8c6f40db9cd797dcc3c54f3648a04&oe=547E3D40&__gda__=1417478673_3e5f336960c24b2c4275500b1e7637e1 "dat hardware")
+This is how the sensors hook up to the MSP430
+![alt text](http://i.imgur.com/77EEUgY.jpg "dat hardware")
 
 
 ## Code Walkthrough
