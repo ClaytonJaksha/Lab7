@@ -111,7 +111,7 @@ __interrupt void ADC10_ISR(void)
 
 ## Debugging
 
-Debugging was primarily done by looking at the Nokia 1202 display and the stored register and expression values within CCS-6.0's debugging feature. I also used an oscilloscope to peer into the PWM signals coming from the microcontroller and from the motor driver chip. Also, for A functionality, ensured my old code from lab 5 still worked before continuing onward with the lab..
+Debugging was primarily done by looking at the Nokia 1202 display and the stored register and expression values within CCS-6.0's debugging feature. By pausing the program during its runtime, I could peer into the values that the MSP430 was seeing from my inputs. The primary issue I faced was that the values would change constantly coming out of the IR sensors. To solve this I used a low-pass filter on my analog outputs from the sensors. This could also be accomplished by a moving-average filter in software, but I preferred the analog solution.
 
 ## Testing
 #### Testing Methodology
@@ -119,12 +119,12 @@ To test the funcionality of my program, I attached the hardware IAW the diagram 
 #### Results
 The code works!
 ##### Basic Functionality
-Robert the robot followed the script to the letter and did exactly what it was supposed to do.
-### B Functionality
+Robert turned on the green LED (`P1.6`) when the right sensor reached its defined threshold voltage and turn it off when it was below the threshold voltage. Similar functionality occurred for the left sensor (red LED `P1.0`) and the center sensor (both LEDs).
+##### B Functionality
 
 Please check repository for `sensors.h`, `sensors.c`, and `readme_sensors.md`. This consitutes a separate, usable library for the sensor functions.
 
-### A Functionality
+##### A Functionality
 
 ![alt text](http://i.imgur.com/YPeizUW.png "GO ARMY, BEAT NAVY")
 
