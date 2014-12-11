@@ -14,7 +14,7 @@ To practice analog-to-digital implementation in a real-world application.
 
 **Include whatever information from this lab you think will be useful in creating your program.**
 
-We must read the IR sensors through `P1.2`, `P1.3`, and `P1.4`. The basic structure of the code will be polling each of the three sensors and then acting off of the values received by the sensors.
+We must read the IR sensors through `P1.3`, `P1.4`, and `P1.5`. The basic structure of the code will be polling each of the three sensors and then acting off of the values received by the sensors.
 
 **Test your sensors with a DMM. Ensure they are functional. What would good reference values be?**
 
@@ -35,7 +35,7 @@ I will repeat this process for `A4` and `A5`.
 
 **Consider the hardware interface. Which ADC10 channels will you use? Which pins correspond to those channels?**
 
-I will use `A3`, `A4`, and `A5` which correspond to `P1.2`, `P1.3`, and `P1.4`, respectively.
+I will use `A3`, `A4`, and `A5` which correspond to `P1.3`, `P1.4`, and `P1.5`, respectively.
 
 **Consider the interface you'll create to your sensors. Will you block or use interrupts? Will you convert one sensor at a time or multiple?**
 
@@ -47,13 +47,16 @@ This is how the sensors hook up to the MSP430
 ## Code Walkthrough
 ### Basic Functionality
 ###### Taken from `main_basic.c`
+The first thing we do in this program is include our libraries for our MSP430 and our sensor library. Also, we must declare the global variables that will be used within and outside of the main loop.
 ```
 #include <msp430.h> 
-
+#include "sensors.h"
 unsigned int left_reading=0;
 unsigned int right_reading=0;
 unsigned int cent_reading=0;
-
+```
+This is the main loop. It first disables the watchdog timer and declares the LED pins (`P1.0` and `P1.6`) as outputs. THe basic function of the infinite loop is to poll each sensor for the value that the sensor detects, then react from those values. If just the left sensor is detected, we turn the red LED on and the green LED off. If just the right sensor is detected, we turn on the green LED on and the red LED off. If the center sensor is detected, we turn both LEDs on. If nothing is detected, we turn both LEDs off.
+```
 void main(void)
 {
 
@@ -81,14 +84,15 @@ void main(void)
 }
 ```
 ###### Taken from `sensors.c`
+This is an example of one of my polling functions from the sensor library. This one in particular polls the right sensor by inputting the sensor value into an A->D converter (`A3` in this case) and then returning the value of the sensor.
 ```
 unsigned int poll_right(void){
 	unsigned int right_val=0;
 	ADC10CTL0 &=~(ENC|ADC10SC);
     ADC10CTL0 = ADC10SHT_3 + ADC10ON + ADC10IE; // ADC10ON, interrupt enabled
-	ADC10CTL1 = INCH_3;                       // input A4
+	ADC10CTL1 = INCH_3;                       // input A3
 	ADC10AE0 &= 0x0000;
-	ADC10AE0 |= BIT3;                         // PA.1 ADC option select
+	ADC10AE0 |= BIT3;                         // PA.3 ADC option select
 	ADC10CTL1 |= ADC10SSEL1|ADC10SSEL0;
 	ADC10CTL0 |= ENC|ADC10SC;             // Sampling and conversion start
 	__bis_SR_register(CPUOFF + GIE);        // LPM0, ADC10_ISR will force exit
@@ -101,6 +105,7 @@ unsigned int poll_right(void){
 	return right_val;
 }
 ```
+This interrupt is essential to operation of the A->D system. It interrupts whenever it detects the system operating and then tells the polling funcitons that it has values to poll from.
 ```
 #pragma vector=ADC10_VECTOR
 __interrupt void ADC10_ISR(void)
@@ -115,7 +120,7 @@ Debugging was primarily done by looking at the Nokia 1202 display and the stored
 
 ## Testing
 #### Testing Methodology
-To test the funcionality of my program, I attached the hardware IAW the diagram in my deisgn section, loaded the program, ran the program, and pressed buttons on my remote (or let the robot run). If it did what I wanted, then it passed the test.
+To test the functionality of my program, I attached the hardware IAW the diagram in my deisgn section, loaded the program, ran the program, and pressed buttons on my remote (or let the robot run). If it did what I wanted, then it passed the test.
 #### Results
 The code works!
 ##### Basic Functionality
@@ -160,12 +165,12 @@ Please check repository for `sensors.h`, `sensors.c`, and `readme_sensors.md`. T
 
 #### Conclusion
 
-Robert the robot can move in a controlled, exact manner by himself or with commands from a user. Be afraid, be very afraid.
+The IR sensors can now operate in a predictable, controlled manner that will be essential to the Lab 8 functionality.
 
 ## Documentation
 
 None
 
 
-# SONS OF SLUM AND GRAVY TAKE NO QUARTER
-![alt text](http://farm7.static.flickr.com/6120/6300471005_c44f5ef019.jpg "GO ARMY, BEAT NAVY")
+# GO ARMY. BEAT NAVY.
+![alt text](http://1i4zuuc9qrh444tutxhd7jtl.wpengine.netdna-cdn.com/wp-content/uploads/sites/14/2011/12/121011_ArmyNavy_al_001a-edit1.jpg "GO ARMY, BEAT NAVY")
