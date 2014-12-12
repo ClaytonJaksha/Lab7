@@ -1,15 +1,15 @@
-/*
- * sensors.h
- *
- *  Created on: Dec 3, 2014
- *      Author: c16clayton.jaksha
- */
+//-----------------------------------------------------------------
+// Name:	Jaksha
+// File:	sensors.h
+// Date:	Fall 2014
+// Purp:	header file for sensor library
+//-----------------------------------------------------------------
 
 #ifndef SENSORS_H_
 #define SENSORS_H_
 
-#define CENT_THRESH_LEAVE 0x254
-#define CENT_THRESH_COME 0x270
+#define CENT_THRESH_LEAVE 0x220
+#define CENT_THRESH_COME 0x230
 #define RIGHT_THRESH 0x280
 #define LEFT_THRESH 0x260
 #define DETECT_RIGHT (right_reading>RIGHT_THRESH)
