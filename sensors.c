@@ -1,9 +1,9 @@
-/*
- * sensors.c
- *
- *  Created on: Dec 3, 2014
- *      Author: c16clayton.jaksha
- */
+//-----------------------------------------------------------------
+// Name:	Jaksha
+// File:	sensors.c
+// Date:	Fall 2014
+// Purp:	function library for using robot IR sensors
+//-----------------------------------------------------------------
 #include <msp430.h>
 #include "sensors.h"
 
@@ -24,7 +24,7 @@ unsigned int poll_left(void){
 unsigned int poll_right(void){
 	unsigned int right_val=0;
 	ADC10CTL0 &=~(ENC|ADC10SC);
-    ADC10CTL0 = ADC10SHT_3 + ADC10ON + ADC10IE; // ADC10ON, interrupt enabled
+    	ADC10CTL0 = ADC10SHT_3 + ADC10ON + ADC10IE; // ADC10ON, interrupt enabled
 	ADC10CTL1 = INCH_3;                       // input A4
 	ADC10AE0 &= 0x0000;
 	ADC10AE0 |= BIT3;                         // PA.1 ADC option select
