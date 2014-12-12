@@ -1,3 +1,10 @@
+//-----------------------------------------------------------------
+// Name:	Jaksha
+// File:	main.c
+// Date:	Fall 2014
+// Purp:	Read from IR sensors and then activate LEDs accordingly
+//-----------------------------------------------------------------
+
 #include <msp430.h> 
 
 unsigned int left_reading=0;
@@ -13,10 +20,10 @@ void main(void)
 
   while(1){
 
-	  left_reading=poll_left();
+	  left_reading=poll_left();		//read IR sensors
 	  right_reading=poll_right();
 	  cent_reading=poll_cent();
-	  if (DETECT_RIGHT&&CLEAR_CENT&&CLEAR_LEFT){
+	  if (DETECT_RIGHT&&CLEAR_CENT&&CLEAR_LEFT){		//activate appropriate LEDs
 		  P1OUT |= BIT0;
 		  P1OUT &=~BIT6;
 	  }else if (DETECT_LEFT&&CLEAR_RIGHT&&CLEAR_CENT){
